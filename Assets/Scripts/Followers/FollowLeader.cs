@@ -16,6 +16,7 @@ public class FollowLeader : MonoBehaviour
 
     [SerializeField]
     private List<FollowerController> followers = new List<FollowerController>();
+    public IReadOnlyList<FollowerController> Followers => followers;    
 
     private void Start()
     {

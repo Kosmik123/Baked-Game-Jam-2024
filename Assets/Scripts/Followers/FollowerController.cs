@@ -10,15 +10,20 @@ public class FollowerController : MonoBehaviour
     }
 
     [SerializeField]
-    private float maxMoveSpeed;
+    private float moveSpeed;
+    public float MoveSpeed
+    {
+        get => moveSpeed;
+        set => moveSpeed = value;
+    }
 
     private void Start()
     {
         target = transform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, maxMoveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
     }
 }
