@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
-public class FollowerController : MonoBehaviour
+public class FollowerController : CatCharacter
 {
     private Vector3 target;
     public Vector3 Target
@@ -9,14 +10,9 @@ public class FollowerController : MonoBehaviour
         set => target = value;
     }
 
-    [SerializeField]
-    private float moveSpeed;
-    public float MoveSpeed
-    {
-        get => moveSpeed;
-        set => moveSpeed = value;
-    }
-
+    [ShowNonSerializedField]
+    private Vector3 currentVelocity;
+    public override Vector2 Velocity => currentVelocity;
     private void Start()
     {
         target = transform.position;
@@ -24,6 +20,8 @@ public class FollowerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, target, ref currentVelocity, MoveSpeed * Time.deltaTime);
     }
 }
+
+
