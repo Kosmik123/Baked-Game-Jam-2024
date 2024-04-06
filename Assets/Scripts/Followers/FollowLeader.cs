@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.VFX;
 
 public class FollowLeader : MonoBehaviour 
 {
@@ -15,12 +16,17 @@ public class FollowLeader : MonoBehaviour
     public int MaxPathLength => pathResolution * TeamSize + 1;
 
     [SerializeField]
-    private List<FollowerController> followers = new List<FollowerController>();
-    public IReadOnlyList<FollowerController> Followers => followers;    
+    private List<CatFollower> followers = new List<CatFollower>();
+    public IReadOnlyList<CatFollower> Followers => followers;    
 
     private void Start()
     {
         pathBehindLeader.Add(transform.position);
+    }
+
+    public void AddFollower(CatFollower follower)
+    {
+        followers.Add(follower);
     }
     
     private void Update()
