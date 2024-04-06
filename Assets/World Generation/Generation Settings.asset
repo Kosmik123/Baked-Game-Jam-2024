@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c98aba894a3fc41b3c114f1ed1122d, type: 3}
+  m_Name: Generation Settings
+  m_EditorClassIdentifier: 
+  spawnProbability: 0.2
+  chunkChances:
+  - <ChunkPrototype>k__BackingField: {fileID: 1032468788524908470, guid: c8e862b0245af7749b75def54bd30a82, type: 3}
+    <Chance>k__BackingField: 2
+  - <ChunkPrototype>k__BackingField: {fileID: 1032468788524908470, guid: 7ee607dbd6d714f41b51a8d5b040b14e, type: 3}
+    <Chance>k__BackingField: 2
