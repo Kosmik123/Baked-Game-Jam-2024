@@ -59,9 +59,9 @@ Material:
     - _GreenStrength: 4.74
     - _RedStrength: 1
     m_Colors:
-    - _Blue: {r: 0.6359629, g: 0.6618372, b: 0.6754716, a: 1}
+    - _Blue: {r: 1, g: 1, b: 1, a: 1}
     - _Color_Strength: {r: 2.11, g: 0.54, b: 28.76, a: 0}
     - _DamageColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Green: {r: 0, g: 0.7515292, b: 1, a: 1}
-    - _Red: {r: 1, g: 0.7075472, b: 0.7075472, a: 1}
+    - _Green: {r: 0.5199111, g: 1, b: 0.19215685, a: 1}
+    - _Red: {r: 0.8867924, g: 0.4475792, b: 0.72344875, a: 1}
   m_BuildTextureStacks: []
