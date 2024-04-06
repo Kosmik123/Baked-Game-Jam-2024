@@ -20,7 +20,11 @@ public class FollowerController : CatCharacter
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, target, ref currentVelocity, MoveSpeed * Time.deltaTime);
+        float dt = Time.deltaTime;
+        var previousPosition = transform.position;
+        transform.position = Vector3.MoveTowards(previousPosition, target, MoveSpeed * dt);
+        var difference = transform.position - previousPosition;
+        currentVelocity = difference / dt; 
     }
 }
 

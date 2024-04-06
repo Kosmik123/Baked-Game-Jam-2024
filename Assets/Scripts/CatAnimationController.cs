@@ -7,6 +7,8 @@ public class CatAnimationController : MonoBehaviour
     [SerializeField]
     private CatCharacter catCharacter;
 
+    private const float idleAnimationSpeed = 4;
+    
     private void Update()
     {
         float xSpeed = catCharacter.Velocity.x;
@@ -22,12 +24,12 @@ public class CatAnimationController : MonoBehaviour
         float speed = catCharacter.Velocity.magnitude;
         if (speed > 0.01f)
         {
-            animator.AnimationSpeed = catCharacter.MoveSpeed;
+            animator.AnimationSpeed = Mathf.Max(idleAnimationSpeed, catCharacter.MoveSpeed);
             SetAnimation(CatAnimation.Jumping);
         }
         else 
         {
-            animator.AnimationSpeed = 4;
+            animator.AnimationSpeed = idleAnimationSpeed;
             SetAnimation(CatAnimation.Standing);
         }
     }
