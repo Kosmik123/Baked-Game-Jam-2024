@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class WorldGenerationSettings : ScriptableObject
 {
     [SerializeField, Range(0, 1)]
@@ -10,22 +11,24 @@ public class WorldGenerationSettings : ScriptableObject
     [SerializeField]
     private List<ChunkChance> chunkChances = new List<ChunkChance>();
 
-    private List<WorldChunk> chunksPrototypesList = null;
-
-    public WorldChunk GetChunkPrototype()
+    private List<WorldChunk> chunksPrototypes;
+    public IReadOnlyList<WorldChunk> ChunksPrototypes
     {
-        if (chunksPrototypesList == null || chunksPrototypesList.Count <= 0)
-            InitializedChunksPrototypesList();
+        get
+        {
+            if (chunksPrototypes == null || chunksPrototypes.Count <= 0)
+                InitializedChunksPrototypesList();
 
-        return chunksPrototypesList[Random.Range(0, chunksPrototypesList.Count)];
+            return chunksPrototypes;
+        }
     }
 
     private void InitializedChunksPrototypesList()
     {
-        chunksPrototypesList = new List<WorldChunk>();
+        chunksPrototypes = new List<WorldChunk>();
         foreach (var chunkChance in chunkChances)
             for (int i = 0; i < chunkChance.Chance; i++)
-                chunksPrototypesList.Add(chunkChance.ChunkPrototype);
+                chunksPrototypes.Add(chunkChance.ChunkPrototype);
     }
 }
 

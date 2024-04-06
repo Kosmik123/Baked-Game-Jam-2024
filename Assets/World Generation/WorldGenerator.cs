@@ -26,6 +26,13 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField, ReadOnly]
     private readonly List<Vector2Int> coordsVisibleLastFrame = new List<Vector2Int>();
 
+    [SerializeField]
+    private bool randomizeSeedOnStart;
+
+    [SerializeField]
+    private int seed;
+    private System.Random rng;
+
     private void Reset()
     {
         observerCamera = Camera.main;
@@ -33,6 +40,9 @@ public class WorldGenerator : MonoBehaviour
 
     private void Start()
     {
+        if (randomizeSeedOnStart)
+            seed = Random.Range(int.MinValue, int.MaxValue);
+        rng = new System.Random(seed);
         UpdateChunks();
     }
 
@@ -89,7 +99,9 @@ public class WorldGenerator : MonoBehaviour
     private WorldChunk CreateChunk(Vector2Int coord)
     {
         var chunkPosition = GridToWorld(coord);
-        var prototype = settings.GetChunkPrototype();
+        var prototypesList = settings.ChunksPrototypes;
+        int randomIndex = rng.Next(prototypesList.Count);
+        var prototype = prototypesList[randomIndex];
         var chunk = Instantiate(prototype, chunkPosition, Quaternion.identity, transform);
         chunk.IsVisible = true;
         chunk.name = $"{prototype.name} {coord}";
