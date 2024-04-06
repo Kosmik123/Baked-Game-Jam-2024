@@ -22,12 +22,7 @@ public class FollowLeader : MonoBehaviour
     {
         pathBehindLeader.Add(transform.position);
     }
-
-    public void AddFollower(FollowerController newFollower)
-    {
-        followers.Add(newFollower);
-    }
-
+    
     private void Update()
     {
         var currentPosition = transform.position;
@@ -57,3 +52,4 @@ public class FollowLeader : MonoBehaviour
         }
     }
 }
+
