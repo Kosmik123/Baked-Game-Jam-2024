@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpritesetAnimator : MonoBehaviour
 {
+    public const int idleAnimationSpeed = 4;
+
     [SerializeField]
     private Sprite[] sprites;
     [SerializeField]
@@ -31,7 +33,6 @@ public class SpritesetAnimator : MonoBehaviour
 
     private int currentIndex;
     private float animationTimer;
-
 
     private void Awake()
     {
