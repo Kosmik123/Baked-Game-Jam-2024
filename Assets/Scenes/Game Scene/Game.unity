@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b4846d6ca54fc488ebcb0af4b6ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveSpeed: 1
+  maxMoveSpeed: 10
 --- !u!1 &810327003
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b4846d6ca54fc488ebcb0af4b6ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveSpeed: 1
+  maxMoveSpeed: 10
 --- !u!1 &1187778571
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b4846d6ca54fc488ebcb0af4b6ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveSpeed: 1
+  maxMoveSpeed: 10
 --- !u!1 &1859141339
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 1859141342}
   - component: {fileID: 1859141341}
   - component: {fileID: 1859141340}
+  - component: {fileID: 1859141343}
   m_Layer: 0
   m_Name: Cat Leader
   m_TagString: Untagged
@@ -716,12 +717,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  pathResolution: 10
-  pathBehindPlayer: []
-  teamMembers:
-  - {fileID: 1129147425}
-  - {fileID: 722412668}
-  - {fileID: 1458656815}
 --- !u!212 &1859141341
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -789,6 +784,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1859141343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859141339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e240f5af64fd7f343b105e374f0a1d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathResolution: 10
+  pathBehindLeader: []
+  followers:
+  - {fileID: 1129147425}
+  - {fileID: 722412668}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
