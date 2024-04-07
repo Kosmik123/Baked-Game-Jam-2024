@@ -41,7 +41,6 @@ namespace CatPackage
         
         private void Update()
         {
-            Debug.Log(_activeCat.level);
             if (_activeCat == null)
             {
                 gameObject.SetActive(false);

@@ -18,6 +18,8 @@ namespace Managers
         public List<KeyColors> KeyColors => keyColors;
         
         public int RescuedCatsCount { get; private set; }
+        public List<ActiveCatData> BackupMembers => backupMembers;
+        public List<(CatMember member, KeyCode attackKey)> TeamMembers => teamMembers;
         public static PlayerManager Instance { get; private set; }
 
         private List<(CatMember member, KeyCode attackKey)> teamMembers = new();
@@ -86,7 +88,7 @@ namespace Managers
             if (teamMembers.Count < 4)
             {
                 var catMember = SpawnCatFollower(cat, position);
-                teamMembers.Add((catMember, KeyCode.A));
+                teamMembers.Add((catMember, GetAttackKey()));
                 var catFollower = catMember.GetComponentInParent<CatFollower>();
                 currentLeader.leaderScript.AddFollower(catFollower);
                 return true;
