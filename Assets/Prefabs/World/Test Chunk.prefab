@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5912816746063199288}
   - component: {fileID: 1032468788524908470}
+  - component: {fileID: 7837740203943872414}
   m_Layer: 0
   m_Name: Test Chunk
   m_TagString: Untagged
@@ -43,6 +44,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbdf8d851a60a1b4cb17a1df58ff1d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wall: {fileID: 0}
+--- !u!114 &7837740203943872414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716341057498380364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa26637bf3cc0746811f9a36d601011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5960671488287041342
