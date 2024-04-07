@@ -29,7 +29,7 @@ public class GUIController : MonoBehaviour
                     {
                         if(item.name == "Frame")
                         {
-                            item.GetComponent<Image>().color = colors[j].color;
+                            item.color = colors[j].color;
                         }
                     }
                     var grandChildsText = child.transform.GetComponentsInChildren<TextMeshProUGUI>();
