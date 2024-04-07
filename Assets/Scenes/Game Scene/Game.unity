@@ -234,7 +234,7 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0.9371724, a: 1}
   - key: 114
     color: {r: 1, g: 0.89104825, b: 0, a: 1}
-  worldGenerator: {fileID: 0}
+  worldGenerator: {fileID: 1187778572}
 --- !u!1 &657056580
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +521,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1486743251608732101, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490126189844628482, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490126189844628482, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490126189844628482, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490126189844628482, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4461451580260318054, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -537,6 +557,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4629810467688604834, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6297937661638680263, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -551,6 +575,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6297937661638680263, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538493689910705127, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538493689910705127, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538493689910705127, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
+      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6815439593964234261, guid: 8de1813b6fdfe55458fcce2630441627, type: 3}
@@ -697,7 +733,7 @@ MonoBehaviour:
   randomizeSeedOnStart: 1
   seed: 0
   spawnTruckEveryChunk: 200
-  truckChunkPrototype: {fileID: 0}
+  truckChunkPrototype: {fileID: 3744618663204772373, guid: c224211acf2f979478c4fbd4b987a3e9, type: 3}
 --- !u!4 &1187778573
 Transform:
   m_ObjectHideFlags: 0

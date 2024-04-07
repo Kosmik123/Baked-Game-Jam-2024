@@ -20,7 +20,7 @@ MonoBehaviour:
   catEyeColor: {r: 1, g: 1, b: 1, a: 1}
   catNoseColor: {r: 1, g: 1, b: 1, a: 1}
   catBreed: 4
-  attackPrefab: {fileID: 0}
+  attackPrefab: {fileID: 3855824550957430280, guid: 0468325b365326b41ba6224e30dc710b, type: 3}
   damage: 15
   cooldown: 0.5
   health: 9
