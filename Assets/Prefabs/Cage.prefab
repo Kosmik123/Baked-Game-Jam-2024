@@ -289,9 +289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75aaf63c193442b4a337d58102e35f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heartsParticles: {fileID: 5184270547974317031, guid: 3e4c5403298cfe64d962a0c2697c4ff9, type: 3}
   catInBox: {fileID: 1938752377555680369}
   bars: {fileID: 9007282234028493343}
   radius: 1.52
+  CatNotUnlockedCanvas: {fileID: 4135691679901114198, guid: 3c0da9b9c5e4abb47b1220d408754368, type: 3}
 --- !u!61 &5790100697139208748
 BoxCollider2D:
   m_ObjectHideFlags: 0

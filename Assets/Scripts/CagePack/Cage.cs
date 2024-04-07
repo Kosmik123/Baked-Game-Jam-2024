@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CatPackage;
 using Managers;
+using Managers.Enum;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,9 +11,11 @@ namespace DefaultNamespace.CagePack
 {
     public class Cage : MonoBehaviour
     {
+        [SerializeField] private GameObject heartsParticles;
         [SerializeField] private Transform catInBox;
         [SerializeField] private GameObject bars;
         [SerializeField] private float radius;
+        [SerializeField] private GameObject CatNotUnlockedCanvas;
 
         private bool opened = false;
         private List<SOCat> cats;
@@ -47,6 +50,10 @@ namespace DefaultNamespace.CagePack
 
         public void OpenCage()
         {
+            AudioManager.Instance.PlaySoundEffect(ESoundEffect.cage_open);
+            var spawnedHearts = Instantiate(heartsParticles, transform.position, Quaternion.identity);
+            Destroy(spawnedHearts, 1f);
+            
             opened = true;
             bars.GetComponent<Bars>().ThrowBars();
             var catSpawnPos = catInBox.transform.position;
@@ -54,8 +61,13 @@ namespace DefaultNamespace.CagePack
             
             var tier = GetRandomTier();
             var catsByTier = cats.Where(c => c.GetDisplayInfo().catTier == tier).ToList();
-            if (catsByTier.Count == 0) return;
-            
+            if (catsByTier.Count == 0)
+            {
+                Instantiate(CatNotUnlockedCanvas, new Vector3(catInBox.transform.position.x, catInBox.transform.position.y + 50, 0), Quaternion.identity);
+
+                return;
+            }
+
             var randomIndex = Random.Range(0, catsByTier.Count);
             var cat = catsByTier[randomIndex];
             var added = PlayerManager.Instance.PickUpCat(cat, catSpawnPos);

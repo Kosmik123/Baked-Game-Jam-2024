@@ -11,7 +11,9 @@ namespace Managers
     {
         [SerializeField] private List<SoundEffectData> soundEffects = new();
         [SerializeField] private Vector2 pitchDiffRange = new Vector2(-0.1f, 0.1f);
+        [SerializeField][Range (0,1)] private float volumeCorrection = 1f;
         
+
         public static AudioManager Instance { get; private set; }
 
         private void Awake()
@@ -30,6 +32,7 @@ namespace Managers
             
             var audioSourceObj = new GameObject($"Audio_{soundType}", typeof(AudioSource)).GetComponent<AudioSource>();
             audioSourceObj.pitch += Random.Range(pitchDiffRange.x, pitchDiffRange.y + 0.01f);
+            audioSourceObj.volume = volumeCorrection;
             audioSourceObj.PlayOneShot(randomSound);
             Destroy(audioSourceObj.gameObject, randomSound.length + 0.2f);
         }

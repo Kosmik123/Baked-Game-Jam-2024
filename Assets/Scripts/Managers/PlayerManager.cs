@@ -11,6 +11,8 @@ namespace Managers
         
         [SerializeField] private GameObject catFollower;
         [SerializeField] private GameObject catLeader;
+        [SerializeField] private GameObject LevelUpCanvas;
+        [SerializeField] private GameObject NewCatCanvas;
         [SerializeField] private List<KeyColors> keyColors;
 
         public List<KeyColors> KeyColors => keyColors;
@@ -80,6 +82,8 @@ namespace Managers
             if (catTeamMemberCheck != default)
             {
                 catTeamMemberCheck.member.LevelUp();
+                Instantiate(LevelUpCanvas, new Vector3(catTeamMemberCheck.member.transform.position.x, catTeamMemberCheck.member.transform.position.y + 50, 0), Quaternion.identity);
+
                 return false;
             }
 
@@ -121,6 +125,8 @@ namespace Managers
                 level = 1,
                 health = cat.GetSpecificInfo(1).maxHealth,
             }, GetAttackKey());
+            Instantiate(NewCatCanvas, new Vector3(followerObject.transform.position.x, followerObject.transform.position.y + 50, 0), Quaternion.identity);
+
             return memberScript;
         }
     }

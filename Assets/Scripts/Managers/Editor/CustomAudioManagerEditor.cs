@@ -11,11 +11,13 @@ namespace Managers.Editor
     {
         private SerializedProperty soundEffectsField;
         private SerializedProperty pitchDiffRangeField;
+        private SerializedProperty volumeCorrectionField;
 
         private AudioManager _audioManagerScript;
         private void OnEnable()
         {
             pitchDiffRangeField = serializedObject.FindProperty("pitchDiffRange");
+            volumeCorrectionField = serializedObject.FindProperty("volumeCorrection");
             soundEffectsField = serializedObject.FindProperty("soundEffects");
             
             _audioManagerScript = target as AudioManager;
@@ -25,6 +27,7 @@ namespace Managers.Editor
         {
             EditorGUILayout.PropertyField(soundEffectsField);
             EditorGUILayout.PropertyField(pitchDiffRangeField);
+            EditorGUILayout.PropertyField(volumeCorrectionField);
             serializedObject.ApplyModifiedProperties();
             
             if (!GUILayout.Button("Generate audio files")) return;
@@ -32,7 +35,8 @@ namespace Managers.Editor
             var audioClips = Resources.LoadAll<AudioClip>("SoundEffects").ToList();
             foreach (var soundType in (ESoundEffect[])System.Enum.GetValues(typeof(ESoundEffect)))
             {
-                var clips = audioClips.Where(c => c.name.ToLower().Contains(soundType.ToString().ToLower()));
+                //var clips = audioClips.Where(c => c.name.ToLower().Contains(soundType.ToString().ToLower()));
+                var clips = audioClips.Where(c => c.name.ToLower().StartsWith(soundType.ToString().ToLower()));
                 Debug.Log(audioClips.ToList().Count);
                 var soundEffects = _audioManagerScript.GetSoundEffects();
                 var soundEffectData = soundEffects.FirstOrDefault(s => s.name == soundType);
