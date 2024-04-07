@@ -7,29 +7,27 @@ public class CatAnimationController : MonoBehaviour
     [SerializeField]
     private CatCharacter catCharacter;
 
-    private const float idleAnimationSpeed = 4;
-    
     private void Update()
     {
         float xSpeed = catCharacter.Velocity.x;
         if (xSpeed > 0) 
         {
-            animator.SpriteRenderer.flipX = false;
+            animator.SpriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (xSpeed < 0)
         {
-            animator.SpriteRenderer.flipX = true;
+            animator.SpriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
         }
 
         float speed = catCharacter.Velocity.magnitude;
         if (speed > 0.01f)
         {
-            animator.AnimationSpeed = Mathf.Max(idleAnimationSpeed, catCharacter.MoveSpeed);
+            animator.AnimationSpeed = Mathf.Max(SpritesetAnimator.idleAnimationSpeed, catCharacter.MoveSpeed);
             SetAnimation(CatAnimation.Jumping);
         }
         else 
         {
-            animator.AnimationSpeed = idleAnimationSpeed;
+            animator.AnimationSpeed = SpritesetAnimator.idleAnimationSpeed;
             SetAnimation(CatAnimation.Standing);
         }
     }

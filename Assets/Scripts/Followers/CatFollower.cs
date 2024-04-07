@@ -1,7 +1,7 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
 
-public class FollowerController : CatCharacter
+public class CatFollower : CatCharacter
 {
     private Vector3 target;
     public Vector3 Target
@@ -13,6 +13,7 @@ public class FollowerController : CatCharacter
     [ShowNonSerializedField]
     private Vector3 currentVelocity;
     public override Vector2 Velocity => currentVelocity;
+
     private void Start()
     {
         target = transform.position;

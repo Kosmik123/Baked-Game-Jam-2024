@@ -57,6 +57,8 @@ Material:
     - _BlueStrength: 1
     - _Damage: 0.028
     - _GreenStrength: 5
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _RedStrength: 1
     m_Colors:
     - _Blue: {r: 1, g: 0.48083818, b: 0, a: 1}

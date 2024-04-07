@@ -87,7 +87,7 @@ namespace Managers
             {
                 var catMember = SpawnCatFollower(cat, position);
                 teamMembers.Add((catMember, KeyCode.A));
-                var catFollower = catMember.GetComponentInParent<FollowerController>();
+                var catFollower = catMember.GetComponentInParent<CatFollower>();
                 currentLeader.leaderScript.AddFollower(catFollower);
                 return true;
             }
