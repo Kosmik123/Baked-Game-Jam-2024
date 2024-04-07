@@ -19,6 +19,9 @@ namespace Managers
         [SerializeField] private GameObject NewCatCanvas;
         [SerializeField] private List<KeyColors> keyColors;
 
+        [SerializeField]
+        private WorldGenerator worldGenerator;
+
         public List<KeyColors> KeyColors => keyColors;
         
         public int RescuedCatsCount { get; private set; }
@@ -59,6 +62,7 @@ namespace Managers
             }, KeyCode.Q);
             teamMembers.Add((member, KeyCode.Q));
             member.OnCatDamaged += Member_OnCatDamaged;
+            worldGenerator.Generate();
         }
 
         private void Member_OnCatDamaged(CatMember cat, int damage)

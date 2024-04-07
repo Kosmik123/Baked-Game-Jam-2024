@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.MaterialProperty;
 
 [RequireComponent(typeof(Grid))]
 public class WorldGenerator : MonoBehaviour
@@ -35,6 +36,12 @@ public class WorldGenerator : MonoBehaviour
     private int seed;
     private System.Random rng;
 
+    [Header("Truck")]
+    [SerializeField]
+    private int spawnTruckEveryChunk = 200;
+    [SerializeField]
+    private WorldChunk truckChunkPrototype;
+
     private void Reset()
     {
         observerCamera = Camera.main;
@@ -45,7 +52,7 @@ public class WorldGenerator : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public void Generate()
     {
         if (randomizeSeedOnStart)
             seed = Random.Range(int.MinValue, int.MaxValue);
@@ -99,8 +106,16 @@ public class WorldGenerator : MonoBehaviour
 
     private void HandleEmptyCoord(Vector2Int coord)
     {
-        var chunk = (Random.value < settings.SpawnProbability) ? CreateChunk(coord) : null;
-        chunksByCoord.Add(coord, chunk);
+        if (chunksByCoord.Count > 100 && chunksByCoord.Count % spawnTruckEveryChunk == 0)
+        {
+            var trackChunk = Instantiate(truckChunkPrototype, GridToWorld(coord), Quaternion.identity, transform);
+            chunksByCoord.Add(coord, trackChunk);
+        }
+        else
+        {
+            var chunk = (Random.value < settings.SpawnProbability) ? CreateChunk(coord) : null;
+            chunksByCoord.Add(coord, chunk);
+        }
     }
 
     private WorldChunk CreateChunk(Vector2Int coord)

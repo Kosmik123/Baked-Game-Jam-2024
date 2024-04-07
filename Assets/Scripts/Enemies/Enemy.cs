@@ -304,4 +304,12 @@ public class Enemy : MonoBehaviour
 
         isAttacking = false;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.DrawSphere(transform.position, attackRange);
+        }
+    }
 }

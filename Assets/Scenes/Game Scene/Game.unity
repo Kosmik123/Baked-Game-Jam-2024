@@ -219,6 +219,8 @@ MonoBehaviour:
   debugCat: {fileID: 11400000, guid: c0bba19a553b4dd4bb8c3f7c058eef49, type: 2}
   catFollower: {fileID: 4128279896785676916, guid: 4ac8b89378d772742a10bbcca56dcea0, type: 3}
   catLeader: {fileID: 3335787140440932800, guid: eda0d1b010354844cbf22390cdfada38, type: 3}
+  LevelUpCanvas: {fileID: 0}
+  NewCatCanvas: {fileID: 0}
   keyColors:
   - key: 113
     color: {r: 0.21248412, g: 1, b: 0, a: 1}
@@ -228,6 +230,7 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0.9371724, a: 1}
   - key: 114
     color: {r: 1, g: 0.89104825, b: 0, a: 1}
+  worldGenerator: {fileID: 1187778572}
 --- !u!20 &810327005 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7249695083046479141, guid: 69937d3716711064db9a8c6f4a58f4fe, type: 3}
@@ -440,6 +443,8 @@ MonoBehaviour:
   observerCamera: {fileID: 810327005}
   randomizeSeedOnStart: 1
   seed: 0
+  spawnTruckEveryChunk: 1000
+  truckChunkPrototype: {fileID: 3744618663204772373, guid: c224211acf2f979478c4fbd4b987a3e9, type: 3}
 --- !u!4 &1187778573
 Transform:
   m_ObjectHideFlags: 0
