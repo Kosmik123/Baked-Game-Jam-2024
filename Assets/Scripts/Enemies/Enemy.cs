@@ -1,5 +1,4 @@
 using NaughtyAttributes;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -22,11 +21,14 @@ public class Enemy : MonoBehaviour
     [Header("Patrolling")]
     [SerializeField]
     private float randomMovementRange;
-    private Vector2 randomMovementCenter;
     [SerializeField]
     private float randomMovementChangeDelay;
     [SerializeField]
     private float patrollingSpeed;
+    [SerializeField]
+    private float patrollingAnimationSpeedModifier = 1;
+
+    private Vector2 randomMovementCenter;
 
     [Header("Detection")]
     [SerializeField]
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
     [Header("Attacking")]
     [SerializeField]
     private float chasingSpeed;
+    [SerializeField]
+    private float chasingAnimationSpeedModifier = 1;
     [SerializeField]
     private float escapeDistance;
     [ShowNonSerializedField]
@@ -77,15 +81,16 @@ public class Enemy : MonoBehaviour
             currentTarget = player.position;
         }
         
-        var direction =  currentTarget - (Vector2)transform.position;
+        var direction = currentTarget - (Vector2)transform.position;
         if (direction.sqrMagnitude > 0.1f) 
         {
             if (direction.sqrMagnitude > 1)
                 direction.Normalize();
 
+            float animationSpeedModifier = isChasing ? chasingAnimationSpeedModifier : patrollingAnimationSpeedModifier;
             var animation = isChasing ? OfficerAnimation.Running : OfficerAnimation.Walking;
             SetAnimation(animation);
-            animator.AnimationSpeed = Mathf.Max(SpritesetAnimator.idleAnimationSpeed, speed);
+            animator.AnimationSpeed = animationSpeedModifier * Mathf.Max(SpritesetAnimator.idleAnimationSpeed, speed);
             float xDirection = direction.x;
             if (xDirection < 0)
                 animator.SpriteRenderer.flipX = true;

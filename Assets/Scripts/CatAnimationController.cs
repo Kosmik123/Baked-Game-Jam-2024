@@ -6,17 +6,17 @@ public class CatAnimationController : MonoBehaviour
     private SpritesetAnimator animator;
     [SerializeField]
     private CatCharacter catCharacter;
-    
+
     private void Update()
     {
         float xSpeed = catCharacter.Velocity.x;
         if (xSpeed > 0) 
         {
-            animator.SpriteRenderer.flipX = false;
+            animator.SpriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (xSpeed < 0)
         {
-            animator.SpriteRenderer.flipX = true;
+            animator.SpriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
         }
 
         float speed = catCharacter.Velocity.magnitude;
