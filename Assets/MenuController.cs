@@ -1,23 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Managers;
 using TMPro;
 using TMPro.Examples;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] private SOCat basicCat;
+    private SOCat _chosenCat;
+
+    [FormerlySerializedAs("gameMenu")] [SerializeField] private GameObject gameUI;
+    
+        [SerializeField]
     GameObject MainScreen;
     [SerializeField]
     GameObject CatChooser;
     [SerializeField]
     GameObject CatDrop;
-    [SerializeField]
+
     List<SOCat> Cats;
 
     [SerializeField]
@@ -44,6 +52,8 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameUI.SetActive(false);
+        Cats = new List<SOCat>(){basicCat}; // Resources.LoadAll<SOCat>("SoCats").ToList();
         MainScreen.SetActive(true);
         CatChooser.SetActive(false);
         CatDrop.SetActive(false);
@@ -70,31 +80,28 @@ public class MenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (rolling)
+        if (!rolling) return;
+        tempTime += Time.deltaTime;
+        if (tempTime >timeToLive )
         {
-            tempTime += Time.deltaTime;
-            if (tempTime >timeToLive )
-            {
-                timeToLive += 0.30f;
-                catToAdd = BlockedCats[UnityEngine.Random.Range(0, BlockedCats.Count - 1)];
-                catToAdd.SetMaterialColor(catDropImageComponent);        
-            }
-            if(timeToLive >= 6f)
-            {
-                rolling = false;
-                timeToLive = 0.1f;
-                tempTime = 0f;
-                Cats.Add(catToAdd);
-                BlockedCats.Remove(catToAdd);
-            }
-            
+            timeToLive += 0.30f;
+            catToAdd = BlockedCats[UnityEngine.Random.Range(0, BlockedCats.Count - 1)];
+            catToAdd.SetMaterialColor(catDropImageComponent);        
         }
+
+        if (!(timeToLive >= 6f)) return;
+        rolling = false;
+        timeToLive = 0.1f;
+        tempTime = 0f;
+        Cats.Add(catToAdd);
+        BlockedCats.Remove(catToAdd);
     }
 
     public void OnStartGameClick()
     {
-        Debug.Log("Start Game");
+        PlayerManager.Instance.StartRun(_chosenCat != null ? _chosenCat : basicCat);
+        MainScreen.SetActive(false);
+        gameUI.SetActive(true);
     }
 
     public void OnChooseCatClick()
@@ -111,7 +118,6 @@ public class MenuController : MonoBehaviour
         MainScreen.SetActive(false);
         CatDrop.SetActive(true);
         catDropImageComponent = CatDropImage.GetComponent<Image>();
-
     }
 
     public void OnApplicationQuit()
@@ -142,7 +148,7 @@ public class MenuController : MonoBehaviour
     public void OnCatChooseClick()
     {
         MainScreen.SetActive(true);
-        //TODO: Zapisac wybranego kota w game Managerze
+        _chosenCat = Cats[catIndex];
         CatChooser.SetActive(false);
     }
     public void OnPrevCatClick()

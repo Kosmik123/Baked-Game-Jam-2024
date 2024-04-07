@@ -10,8 +10,6 @@ namespace Managers
     public class PlayerManager : MonoBehaviour
     {
         public CatDamageEventHandler OnCatDamaged;
-
-        [SerializeField] private SOCat debugCat;
         
         [SerializeField] private GameObject catFollower;
         [SerializeField] private GameObject catLeader;
@@ -35,8 +33,6 @@ namespace Managers
         {
             if (Instance != null && Instance != this) Destroy(gameObject);
             else Instance = this;
-            
-            StartRun(debugCat);
         }
 
         private void LateUpdate()
@@ -46,7 +42,7 @@ namespace Managers
             Camera.main.transform.position = currentLeader.leaderScript.transform.position;
         }
 
-        private void StartRun(SOCat cat)
+        public void StartRun(SOCat cat)
         {
             var catLeaderPrefab = Instantiate(catLeader, Vector2.zero, Quaternion.identity);
             currentLeader = (catLeaderPrefab.GetComponent<FollowLeader>(), cat);

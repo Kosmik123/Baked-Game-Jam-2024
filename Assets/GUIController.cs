@@ -90,13 +90,13 @@ public class GUIController : MonoBehaviour
         {
             foreach (var bar in Bars)
             {
-                if(cat.attackKey == bar.key)
-                {
-                    var activeCat = cat.member.GetCat();
-                    var catInfo = cat.member.GetCat().cat.GetSpecificInfo(activeCat.level);
-                    bar.Image.fillAmount = activeCat.health / catInfo.maxHealth;
-                    //bar.ColdDown.fillAmount = catInfo.cooldown;
-                }
+                if (cat.attackKey != bar.key) continue;
+                
+                var activeCat = cat.member.GetCat();
+                var catInfo = cat.member.GetCat().cat.GetSpecificInfo(activeCat.level);
+                
+                bar.Image.fillAmount = activeCat.health / (catInfo.maxHealth != 0 ? catInfo.maxHealth : 1);
+                //bar.ColdDown.fillAmount = catInfo.cooldown;
             }
 
         }
