@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using CatPackage;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class SOCat : ScriptableObject
     [Header("Display info")] [SerializeField]
     private Sprite catSprite;
     [SerializeField] private string catName;
+    [SerializeField] private string abilityDescription;
+    [SerializeField] private CatAnimation attackAnimation;
     [SerializeField] private Color catColor;
     [SerializeField] private Color catEyeColor;
     [SerializeField] private Color catNoseColor;
@@ -25,13 +28,12 @@ public class SOCat : ScriptableObject
     
     public void SpawnAttackPrefab(Vector3 shootPos, Transform self, int catLevel)
     {
-        var mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var lookDirection = (mousePosWorld - self.position).normalized;
-        var goalRotation = Quaternion.LookRotation(lookDirection, Vector3.forward);
-        var attackObject = Instantiate(attackPrefab, shootPos, goalRotation);
+        var attackObject = Instantiate(attackPrefab, shootPos, Quaternion.identity);
+        UtilsMethods.LookAtMouse(attackObject.transform);
         var attackScript = attackObject.GetComponent<AttackObject>();
         attackScript.Attack(self, Mathf.CeilToInt(
             damage + (damage / 10f) * catLevel));
+        Destroy(attackObject, 0.1f);
     }
 
     public void SetMaterialColor(SpriteRenderer spriteRenderer)
@@ -73,9 +75,20 @@ public class SOCat : ScriptableObject
 
     public SCatSpecificInfo GetSpecificInfo(int catLevel)
     {
+        float getCooldown()
+        {
+            var cd = cooldown;
+            for (var i = 0; i < catLevel; i++)
+            {
+                cd -= (cd / 100f) * 5f;
+            }
+
+            return cd;
+        }
+        
         return new SCatSpecificInfo()
         {
-            cooldown = cooldown,
+            cooldown = getCooldown(),
             damage = Mathf.CeilToInt(damage + (damage / 100f * catLevel)),
             maxHealth = Mathf.CeilToInt(health + (health / 100f * catLevel)),
         };

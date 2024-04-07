@@ -22,6 +22,16 @@ public class FollowLeader : MonoBehaviour
     {
         pathBehindLeader.Add(transform.position);
     }
+
+    public void AddFollower(FollowerController followerController)
+    {
+        followers.Add(followerController);
+    }
+
+    public void RemoveController(FollowerController followerController)
+    {
+        followers.Remove(followerController);
+    }
     
     private void Update()
     {

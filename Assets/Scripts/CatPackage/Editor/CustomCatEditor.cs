@@ -9,6 +9,8 @@ namespace CatPackage.Editor
     {
         private SerializedProperty catSprite;
         private SerializedProperty catName;
+        private SerializedProperty abilityDescription;
+        private SerializedProperty attackAnimation;
         private SerializedProperty catColor;
         private SerializedProperty catEyeColor;
         private SerializedProperty catNoseColor;
@@ -24,6 +26,8 @@ namespace CatPackage.Editor
         {
             catSprite = serializedObject.FindProperty("catSprite");
             catName = serializedObject.FindProperty("catName");
+            abilityDescription = serializedObject.FindProperty("abilityDescription");
+            attackAnimation = serializedObject.FindProperty("attackAnimation");
             catColor = serializedObject.FindProperty("catColor");
             catEyeColor = serializedObject.FindProperty("catEyeColor");
             catNoseColor = serializedObject.FindProperty("catNoseColor");
