@@ -50,13 +50,13 @@ public class WorldGenerator : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        rng = new System.Random(seed);
     }
 
     public void Generate()
     {
         if (randomizeSeedOnStart)
             seed = Random.Range(int.MinValue, int.MaxValue);
-        rng = new System.Random(seed);
         UpdateChunks();
     }
 

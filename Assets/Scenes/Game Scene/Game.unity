@@ -234,6 +234,7 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0.9371724, a: 1}
   - key: 114
     color: {r: 1, g: 0.89104825, b: 0, a: 1}
+  worldGenerator: {fileID: 0}
 --- !u!1 &657056580
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +696,8 @@ MonoBehaviour:
   observerCamera: {fileID: 810327005}
   randomizeSeedOnStart: 1
   seed: 0
+  spawnTruckEveryChunk: 200
+  truckChunkPrototype: {fileID: 0}
 --- !u!4 &1187778573
 Transform:
   m_ObjectHideFlags: 0
@@ -798,6 +801,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3350870635115780188, guid: 9228a99aa4cb621429a91c860111464a, type: 3}
+      propertyPath: m_text
+      value: Escape from alCATraz
+      objectReference: {fileID: 0}
     - target: {fileID: 4072708528203783712, guid: 9228a99aa4cb621429a91c860111464a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
