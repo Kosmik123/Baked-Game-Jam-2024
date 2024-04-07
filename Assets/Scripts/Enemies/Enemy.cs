@@ -8,7 +8,7 @@ using UnityEngine;
 public class RandomValue
 {
     [SerializeField]
-    private ParticleSystem.MinMaxCurve range;
+    public ParticleSystem.MinMaxCurve range;
 
     private bool hasValue;
 
