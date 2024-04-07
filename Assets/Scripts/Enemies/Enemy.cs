@@ -1,6 +1,7 @@
 using CatPackage;
 using Managers;
 using NaughtyAttributes;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour
     }
 
     private static CatMember player;
-    
+
     [SerializeField]
     private Rigidbody2D rigidbody2d;
     [SerializeField]
@@ -100,15 +101,28 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private LineRenderer shootingLine;
     [SerializeField]
-    private LayerMask damagedLayers; 
+    private LayerMask damagedLayers;
 
     [ShowNonSerializedField]
     private bool isAttacking;
 
     private Collider2D[] detectedMeeleeColliders = new Collider2D[4];
 
+    [Header("Damaging")]
+    [SerializeField, Tag]
+    private string projectileTag;
+    [ShowNonSerializedField]
+    private bool isBeingDamaged;
+    [SerializeField]
+    private RandomValue maxHealthValue;
+    [ShowNonSerializedField]
+    private int maxHealth;
+    [ShowNonSerializedField]
+    private int currentHealth;
+
     private void Awake()
     {
+        currentHealth = maxHealth = Mathf.RoundToInt(maxHealthValue.Value);
         attackType = (AttackType)Random.Range(0, 3);
     }
 
@@ -134,6 +148,9 @@ public class Enemy : MonoBehaviour
         if (isAttacking)
             return;
 
+        if (isBeingDamaged)
+            return;
+
         float squareDistanceToPlayer = (player.transform.position - transform.position).sqrMagnitude;
         if (isChasing == false && squareDistanceToPlayer < playerDetectionRange.Value * playerDetectionRange.Value)
         {
@@ -154,9 +171,9 @@ public class Enemy : MonoBehaviour
         {
             currentTarget = attackAndChaseTarget.transform.position;
         }
-        
+
         var direction = currentTarget - (Vector2)transform.position;
-        if (direction.sqrMagnitude > 0.1f) 
+        if (direction.sqrMagnitude > 0.1f)
         {
             if (direction.sqrMagnitude > 1)
                 direction.Normalize();
@@ -179,7 +196,7 @@ public class Enemy : MonoBehaviour
                         if (Mathf.Abs(relativePosition.y) < Mathf.Abs(relativePosition.x))
                         {
                             animation = OfficerAnimation.RunningWithGunFront;
-                        }    
+                        }
                         else if (relativePosition.y > 0)
                         {
                             shootingLineY = 1.68f;
@@ -194,9 +211,9 @@ public class Enemy : MonoBehaviour
                         float shootingLineX = 0.625f;
                         if (animator.SpriteRenderer.flipX)
                             shootingLineX *= -1;
-                        if (shootingLine)   
+                        if (shootingLine)
                             shootingLine.transform.localPosition = new Vector3(shootingLineX, shootingLineY);
-    
+
                         break;
                 }
             }
@@ -220,7 +237,7 @@ public class Enemy : MonoBehaviour
                 animator.SpriteRenderer.flipX = true;
             else if (xDirection > 0)
                 animator.SpriteRenderer.flipX = false;
-            
+
             rigidbody2d.velocity = direction * speed;
         }
         else
@@ -303,6 +320,53 @@ public class Enemy : MonoBehaviour
             shootingLine.enabled = false;
 
         isAttacking = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(projectileTag))
+        {
+            int damage = 1;
+            //if (collision.TryGetComponent<Projectile>(out var projectile))
+            //    damage = projectile.Damage;
+            TakeDamage(damage);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        isBeingDamaged = true;
+        currentHealth -= damage;
+        rigidbody2d.velocity = Vector3.zero;
+        var animation = currentHealth <= 0 ? OfficerAnimation.FallingDown : Random.value < 0.5f ? OfficerAnimation.DamageStrong : OfficerAnimation.DamageWeak;
+        animator.AnimationSpeed = 4;
+        SetAnimation(animation);
+        Invoke(nameof(StopBeingDamaged), 0.5f);
+    }
+
+    private void StopBeingDamaged()
+    {
+        if (currentHealth <= 0)
+        {
+            StartCoroutine(DisappearCo());
+        }
+        else
+        { 
+            isBeingDamaged = false;
+        } 
+    }
+
+    private IEnumerator DisappearCo()
+    {
+        for (float progress = 0; progress < 1; progress += Time.deltaTime)
+        {
+            var color = animator.SpriteRenderer.color;
+            color.a = 1 - progress;
+            animator.SpriteRenderer.color = color;
+            yield return null;  
+        }
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

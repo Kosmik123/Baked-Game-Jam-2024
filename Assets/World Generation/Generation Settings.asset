@@ -15,6 +15,6 @@ MonoBehaviour:
   spawnProbability: 0.7
   chunkChances:
   - <Prototype>k__BackingField: {fileID: 716341057498380364, guid: c8e862b0245af7749b75def54bd30a82, type: 3}
-    <Chance>k__BackingField: 2
+    <Chance>k__BackingField: 1
   - <Prototype>k__BackingField: {fileID: 4259108515374172073, guid: 09a2ee19b73fe954896dc0ceed75359c, type: 3}
-    <Chance>k__BackingField: 2
+    <Chance>k__BackingField: 1
