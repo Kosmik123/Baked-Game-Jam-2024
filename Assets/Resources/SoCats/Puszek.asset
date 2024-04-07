@@ -16,9 +16,9 @@ MonoBehaviour:
   catName: Puszek
   abilityDescription: 
   attackAnimation: 0
-  catColor: {r: 0, g: 0, b: 0, a: 0}
-  catEyeColor: {r: 0, g: 0, b: 0, a: 0}
-  catNoseColor: {r: 0, g: 0, b: 0, a: 0}
+  catColor: {r: 0.49056602, g: 0.28747952, b: 0, a: 1}
+  catEyeColor: {r: 1, g: 0.6734694, b: 0, a: 1}
+  catNoseColor: {r: 1, g: 0, b: 0, a: 1}
   catBreed: 2
   attackPrefab: {fileID: 3855824550957430280, guid: 1dc7c694eb4cb09468f754348acce582, type: 3}
   damage: 6

@@ -324,7 +324,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(projectileTag))
+        if (isBeingDamaged == false && collision.CompareTag(projectileTag))
         {
             int damage = 1;
             //if (collision.TryGetComponent<Projectile>(out var projectile))
@@ -340,7 +340,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         rigidbody2d.velocity = Vector3.zero;
         var animation = currentHealth <= 0 ? OfficerAnimation.FallingDown : Random.value < 0.5f ? OfficerAnimation.DamageStrong : OfficerAnimation.DamageWeak;
-        animator.AnimationSpeed = 4;
+        animator.AnimationSpeed = 6;
         SetAnimation(animation);
         Invoke(nameof(StopBeingDamaged), 0.5f);
     }
@@ -359,6 +359,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DisappearCo()
     {
+        rigidbody2d.velocity = Vector2.zero;
         for (float progress = 0; progress < 1; progress += Time.deltaTime)
         {
             var color = animator.SpriteRenderer.color;

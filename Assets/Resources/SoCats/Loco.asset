@@ -16,9 +16,9 @@ MonoBehaviour:
   catName: Loco
   abilityDescription: 
   attackAnimation: 0
-  catColor: {r: 0, g: 0, b: 0, a: 0}
-  catEyeColor: {r: 0, g: 0, b: 0, a: 0}
-  catNoseColor: {r: 0, g: 0, b: 0, a: 0}
+  catColor: {r: 0, g: 0, b: 0, a: 1}
+  catEyeColor: {r: 1, g: 0.8970643, b: 0, a: 1}
+  catNoseColor: {r: 0, g: 0, b: 0, a: 1}
   catBreed: 1
   attackPrefab: {fileID: 3855824550957430280, guid: 0468325b365326b41ba6224e30dc710b, type: 3}
   damage: 9
