@@ -63,7 +63,8 @@ MonoBehaviour:
   cageSpawnValue: 0.85
   cagePrefab: {fileID: 6366165656943364341, guid: 469d10a9b495ba744911d1426ef99b5b, type: 3}
   guardSpawnValue: 0.65
-  guardPrefab: {fileID: 7155298489773010531, guid: 8cb2f15eadedcdd40ae72ab326cc0f79, type: 3}
+  guardPrefabs:
+  - {fileID: 7155298489773010531, guid: 8cb2f15eadedcdd40ae72ab326cc0f79, type: 3}
   inactiveRadius: 15
 --- !u!1001 &344715140596620406
 PrefabInstance:

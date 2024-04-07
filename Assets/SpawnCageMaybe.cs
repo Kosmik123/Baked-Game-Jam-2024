@@ -15,7 +15,7 @@ public class SpawnCageMaybe : MonoBehaviour
     [SerializeField]
     private float guardSpawnValue = 0.6f;
     [SerializeField]
-    private GameObject guardPrefab;
+    private GameObject[] guardPrefabs;
 
     [SerializeField]
     private float inactiveRadius = 10;
@@ -45,7 +45,8 @@ public class SpawnCageMaybe : MonoBehaviour
             }
             else if (value > guardSpawnValue)
             {
-                var guard = Instantiate(guardPrefab, transform.position, Quaternion.identity);
+                var randomGuardPrefab = guardPrefabs[Random.Range(0, guardPrefabs.Length)];
+                var guard = Instantiate(randomGuardPrefab, transform.position, Quaternion.identity);
             }
         }
     }

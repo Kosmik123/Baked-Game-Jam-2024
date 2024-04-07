@@ -33,10 +33,9 @@ namespace CatPackage
             _activeCat.level++;
         }
 
-        public void ChangeHp(int diff, bool add = false)
+        public void TakeDamage(int damage)
         {
-            var val = diff * (add ? 1 : -1);
-            _activeCat.health += val;
+            _activeCat.health -= damage;
         }
         
         private void Update()
