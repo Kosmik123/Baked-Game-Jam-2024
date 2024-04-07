@@ -59,7 +59,7 @@ namespace CatPackage
         {
             yield return new WaitForSeconds(0.1f);
             spriteRenderer.color = DamagedColor;;
-            for (float progress = 0;  progress < 1; progress += Time.deltaTime * 2)
+            for (float progress = 0;  progress < 1; progress += Time.deltaTime * 3)
             {
                 yield return null;
                 spriteRenderer.color = Color.Lerp(DamagedColor, catColor, progress);

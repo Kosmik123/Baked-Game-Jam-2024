@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 739984443
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 897112652, guid: 1603f1d27edd30943af859a7b31433c0, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -444,8 +444,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 739984443
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 1, z: 0}
@@ -689,8 +689,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_ConstantMin: 0
-      m_ConstantMax: 0
+      m_ConstantMin: 4
+      m_ConstantMax: 8
     value: 0
   chasingAnimationSpeedModifier: 2
   escapeDistance:
@@ -778,6 +778,26 @@ MonoBehaviour:
   damagedLayers:
     serializedVersion: 2
     m_Bits: 65536
+  projectileTag: Projectile
+  maxHealthValue:
+    range:
+      m_Mode: 3
+      m_CurveMultiplier: 0
+      m_CurveMin:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_CurveMax:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_ConstantMin: 3
+      m_ConstantMax: 10
+    value: 0
 --- !u!50 &7049064126930416960
 Rigidbody2D:
   serializedVersion: 4
