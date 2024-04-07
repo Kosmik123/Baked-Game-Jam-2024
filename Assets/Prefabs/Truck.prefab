@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7962612023956840435}
   - component: {fileID: 363647231605157272}
   - component: {fileID: 1622360707404599635}
+  - component: {fileID: -6655852712662316513}
   m_Layer: 3
   m_Name: Truck
   m_TagString: Untagged
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -285494757
+  m_SortingLayer: -1
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 2f10cb0be3d67e74bba21846de66587d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,6 +134,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87709093, y: 0.21684118}
   m_EdgeRadius: 0
+--- !u!114 &-6655852712662316513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654210437589424721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.4075963, y: -0.3468738, z: 0}
+  - {x: -0.4075963, y: 0.22278884, z: 0}
+  - {x: 0.1386056, y: 0.22440906, z: 0}
+  - {x: 0.1386056, y: 0.19272779, z: 0}
+  - {x: 0.32077295, y: 0.19272779, z: 0}
+  - {x: 0.47359884, y: 0.027420964, z: 0}
+  - {x: 0.47359896, y: -0.4366374, z: 0}
+  - {x: -0.34717402, y: -0.44353792, z: 0}
+  - {x: -0.34717402, y: -0.34585395, z: 0}
+  m_ShapePathHash: 1829617491
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 33802
+  m_LocalBounds:
+    m_Center: {x: 0.033001333, y: -0.10956442, z: 0}
+    m_Extent: {x: 0.44059762, y: 0.3339735, z: 0}
 --- !u!1 &5696226412020164108
 GameObject:
   m_ObjectHideFlags: 0

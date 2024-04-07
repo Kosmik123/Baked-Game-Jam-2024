@@ -77,6 +77,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6982016779192894429}
     m_Modifications:
+    - target: {fileID: 2185761852558507920, guid: fa92d7332940eb843a5544005e7cf5fa, type: 3}
+      propertyPath: m_InstanceId
+      value: -161124
+      objectReference: {fileID: 0}
     - target: {fileID: 5987767536750429331, guid: fa92d7332940eb843a5544005e7cf5fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -120,10 +124,6 @@ PrefabInstance:
     - target: {fileID: 7361508916672947939, guid: fa92d7332940eb843a5544005e7cf5fa, type: 3}
       propertyPath: m_Name
       value: Wall Vertical
-      objectReference: {fileID: 0}
-    - target: {fileID: 7361508916672947939, guid: fa92d7332940eb843a5544005e7cf5fa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
