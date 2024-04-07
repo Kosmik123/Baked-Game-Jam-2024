@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c98aba894a3fc41b3c114f1ed1122d, type: 3}
   m_Name: Generation Settings
   m_EditorClassIdentifier: 
-  spawnProbability: 0.2
+  spawnProbability: 0.7
   chunkChances:
-  - <ChunkPrototype>k__BackingField: {fileID: 1032468788524908470, guid: c8e862b0245af7749b75def54bd30a82, type: 3}
+  - <Prototype>k__BackingField: {fileID: 716341057498380364, guid: c8e862b0245af7749b75def54bd30a82, type: 3}
     <Chance>k__BackingField: 2
-  - <ChunkPrototype>k__BackingField: {fileID: 1032468788524908470, guid: 7ee607dbd6d714f41b51a8d5b040b14e, type: 3}
+  - <Prototype>k__BackingField: {fileID: 4259108515374172073, guid: 09a2ee19b73fe954896dc0ceed75359c, type: 3}
     <Chance>k__BackingField: 2
