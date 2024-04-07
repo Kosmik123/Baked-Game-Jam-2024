@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7551162917046071455}
   - component: {fileID: 3891668841655084087}
   - component: {fileID: 8809284525239057541}
-  - component: {fileID: 8010433156178255750}
   m_Layer: 0
   m_Name: Cat Leader
   m_TagString: Player
@@ -142,18 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceRigidbody: {fileID: 7551162917046071455}
   leader: {fileID: 6693677003680916795}
---- !u!114 &8010433156178255750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3335787140440932800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd20f0e098d4e9747a04eed887517584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7879577018839241864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,6 +157,10 @@ PrefabInstance:
       propertyPath: catCharacter
       value: 
       objectReference: {fileID: 7369131472950945089}
+    - target: {fileID: 7732311571653158575, guid: 00fca38c205e2b940a89c25b5b790118, type: 3}
+      propertyPath: m_Intensity
+      value: 1.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8919533782257819370, guid: 00fca38c205e2b940a89c25b5b790118, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
