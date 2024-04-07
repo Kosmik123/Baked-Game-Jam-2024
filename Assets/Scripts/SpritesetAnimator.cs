@@ -45,23 +45,23 @@ public class SpritesetAnimator : MonoBehaviour
         animationTimer = 0;
     }
 
-    public void SetAnimation(int animationIndex, bool reversed = false)
+    public void SetAnimation(int rowIndex, bool reversed = false)
     {
-        SetAnimation(animationIndex, columnsCount, reversed);
+        SetAnimation(rowIndex, columnsCount, reversed);
     }
 
-    public void SetAnimation(int animationIndex, int overrideSequenceLenght, bool reversed = false)
+    public void SetAnimation(int rowIndex, int overrideSequenceLength, bool reversed = false)
     {
-        if (currentAnimationIndex == animationIndex && overrideSequenceLenght == currentSequence.Count && isReversed == reversed)
+        if (currentAnimationIndex == rowIndex && overrideSequenceLength == currentSequence.Count && isReversed == reversed)
             return;
 
         isReversed = reversed;
-        currentAnimationIndex = animationIndex;
+        currentAnimationIndex = rowIndex;
         currentSequence.Clear();
-        int firstFrameIndex = animationIndex * columnsCount;
-        for (int i = 0; i < overrideSequenceLenght; i++)
+        int firstFrameIndex = rowIndex * columnsCount;
+        for (int i = 0; i < overrideSequenceLength; i++)
         {
-            var relativeIndex = reversed ? (overrideSequenceLenght - 1 - i) : i;
+            var relativeIndex = reversed ? (overrideSequenceLength - 1 - i) : i;
             currentSequence.Add(sprites[firstFrameIndex + relativeIndex]);
         }
         currentIndex = 0;
