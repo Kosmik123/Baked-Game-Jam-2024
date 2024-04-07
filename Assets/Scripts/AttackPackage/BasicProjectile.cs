@@ -25,6 +25,10 @@ namespace AttackPackage
         private void FixedUpdate()
         {
             transform.position += transform.up * speed * Time.deltaTime;
+            if (spinSpeed > 0)
+            {
+                transform.Rotate(0, 0, spinSpeed * Time.deltaTime, Space.Self);
+            }
             if (Vector2.Distance(transform.position, _startPos) >= range)
             {
                 DestroyProjectile();
