@@ -13,6 +13,7 @@ namespace DefaultNamespace.CagePack
         [SerializeField] private Transform catInBox;
         [SerializeField] private GameObject bars;
         [SerializeField] private float radius;
+        [SerializeField] private GameObject CatNotUnlockedCanvas;
 
         private bool opened = false;
         private List<SOCat> cats;
@@ -54,8 +55,13 @@ namespace DefaultNamespace.CagePack
             
             var tier = GetRandomTier();
             var catsByTier = cats.Where(c => c.GetDisplayInfo().catTier == tier).ToList();
-            if (catsByTier.Count == 0) return;
-            
+            if (catsByTier.Count == 0)
+            {
+                Instantiate(CatNotUnlockedCanvas, new Vector3(catInBox.transform.position.x, catInBox.transform.position.y + 50, 0), Quaternion.identity);
+
+                return;
+            }
+
             var randomIndex = Random.Range(0, catsByTier.Count);
             var cat = catsByTier[randomIndex];
             var added = PlayerManager.Instance.PickUpCat(cat, catSpawnPos);
