@@ -292,6 +292,7 @@ MonoBehaviour:
   catInBox: {fileID: 1938752377555680369}
   bars: {fileID: 9007282234028493343}
   radius: 1.52
+  CatNotUnlockedCanvas: {fileID: 4135691679901114198, guid: 3c0da9b9c5e4abb47b1220d408754368, type: 3}
 --- !u!61 &5790100697139208748
 BoxCollider2D:
   m_ObjectHideFlags: 0
