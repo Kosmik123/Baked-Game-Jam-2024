@@ -1,5 +1,32 @@
+using CatPackage;
+using Managers;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 using UnityEngine;
+
+[System.Serializable]
+public class RandomValue
+{
+    [SerializeField]
+    private ParticleSystem.MinMaxCurve range;
+
+    private bool hasValue;
+
+    [SerializeField, ReadOnly, AllowNesting] 
+    private float value;
+    public float Value
+    {
+        get
+        {
+            if (hasValue == false)
+            {
+                value = Random.Range(range.constantMin, range.constantMax);
+                hasValue = true;
+            }
+            return value;
+        }
+    }
+}
 
 public class Enemy : MonoBehaviour
 {
@@ -16,7 +43,7 @@ public class Enemy : MonoBehaviour
         Ranged,
     }
 
-    private static Transform player;
+    private static CatMember player;
     
     [SerializeField]
     private Rigidbody2D rigidbody2d;
@@ -27,29 +54,29 @@ public class Enemy : MonoBehaviour
 
     [Header("Patrolling")]
     [SerializeField]
-    private float randomMovementRange;
+    private RandomValue randomMovementRange;
     [SerializeField]
-    private float randomMovementChangeDelay;
+    private RandomValue randomMovementChangeDelay;
     [SerializeField]
-    private float patrollingSpeed;
+    private RandomValue patrollingSpeed;
     [SerializeField]
-    private float patrollingAnimationSpeedModifier = 1;
+    private RandomValue patrollingAnimationSpeedModifier;
     [ShowNonSerializedField]
     private Vector2 randomMovementCenter;
 
     [Header("Detection")]
     [SerializeField]
-    private float playerDetectionRange;
+    private RandomValue playerDetectionRange;
     [SerializeField]
     private Animation exclamationAnimation;
 
     [Header("Chasing")]
     [SerializeField]
-    private float chasingSpeed;
+    private RandomValue chasingSpeed;
     [SerializeField]
     private float chasingAnimationSpeedModifier = 1;
     [SerializeField]
-    private float escapeDistance;
+    private RandomValue escapeDistance;
     [ShowNonSerializedField]
     private bool isChasing;
 
@@ -57,13 +84,17 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AttackType attackType;
     [SerializeField]
-    private float attackRange = 2;
+    private RandomValue meeleeAttackRange;
     [SerializeField]
-    private float attackCooldown = 5;
+    private RandomValue rangedAttackRange;
+    [ShowNonSerializedField]
+    private float attackRange;
+    [SerializeField]
+    private RandomValue attackCooldown;
     [ShowNonSerializedField]
     private float attackCooldownTimer;
     [SerializeField]
-    private Transform rangedAttackTarget; // cat member
+    private CatMember rangedAttackTarget; // cat member
     [SerializeField]
     private LineRenderer shootingLine;
 
@@ -72,18 +103,26 @@ public class Enemy : MonoBehaviour
 
     private Collider2D[] detectedMeeleeColliders = new Collider2D[4];
 
+    private void Awake()
+    {
+        attackType = (AttackType)Random.Range(0, 3);
+    }
+
     private void Start()
     {
-        if (player == null) 
-            player = FindObjectOfType<FollowLeader>().transform;
+        var attackRangeRange = attackType == AttackType.Ranged ? rangedAttackRange : meeleeAttackRange;
+        attackRange = attackRangeRange.Value;
+
+        if (player == null)
+            player = PlayerManager.Instance.TeamMembers[0].member;
 
         randomMovementCenter = transform.position;
-        InvokeRepeating(nameof(ChangePatrolTarget), 0, randomMovementChangeDelay);
+        InvokeRepeating(nameof(ChangePatrolTarget), 0, randomMovementChangeDelay.Value);
     }
 
     private void ChangePatrolTarget()
     {
-        currentTarget = randomMovementCenter + Random.insideUnitCircle * randomMovementRange;
+        currentTarget = randomMovementCenter + Random.insideUnitCircle * randomMovementRange.Value;
     }
 
     private void Update()
@@ -91,26 +130,26 @@ public class Enemy : MonoBehaviour
         if (isAttacking)
             return;
 
-        float squareDistanceToPlayer = (player.position - transform.position).sqrMagnitude;
-        if (isChasing == false && squareDistanceToPlayer < playerDetectionRange * playerDetectionRange)
+        float squareDistanceToPlayer = (player.transform.position - transform.position).sqrMagnitude;
+        if (isChasing == false && squareDistanceToPlayer < playerDetectionRange.Value * playerDetectionRange.Value)
         {
             isChasing = true;
             if (attackType == AttackType.Ranged)
-                rangedAttackTarget = player;  // potem to ma byæ cat member
+                rangedAttackTarget = PlayerManager.Instance.TeamMembers[Random.Range(0, PlayerManager.Instance.TeamMembers.Count)].member;  // potem to ma byæ cat member
 
             //exclamationAnimation?.Play();
             CancelInvoke(nameof(ChangePatrolTarget));
         }
-        else if (isChasing && squareDistanceToPlayer > escapeDistance * escapeDistance)
+        else if (isChasing && squareDistanceToPlayer > escapeDistance.Value * escapeDistance.Value)
         {
             isChasing = false;
-            InvokeRepeating(nameof(ChangePatrolTarget), 0, randomMovementChangeDelay);
+            InvokeRepeating(nameof(ChangePatrolTarget), 0, randomMovementChangeDelay.Value);
         }
 
-        float speed = isChasing ? chasingSpeed : patrollingSpeed;
+        float speed = isChasing ? chasingSpeed.Value : patrollingSpeed.Value;
         if (isChasing)
         {
-            currentTarget = player.position;
+            currentTarget = player.transform.position;
         }
         
         var direction = currentTarget - (Vector2)transform.position;
@@ -119,7 +158,7 @@ public class Enemy : MonoBehaviour
             if (direction.sqrMagnitude > 1)
                 direction.Normalize();
 
-            float animationSpeedModifier = isChasing ? chasingAnimationSpeedModifier : patrollingAnimationSpeedModifier;
+            float animationSpeedModifier = isChasing ? chasingAnimationSpeedModifier : patrollingAnimationSpeedModifier.Value;
             var animation = OfficerAnimation.Walking;
             if (isChasing)
             {
@@ -132,7 +171,7 @@ public class Enemy : MonoBehaviour
                         animation = OfficerAnimation.RunningWithNightstick;
                         break;
                     case AttackType.Ranged:
-                        var relativePosition = rangedAttackTarget.position - transform.position;
+                        var relativePosition = rangedAttackTarget.transform.position - transform.position;
                         float shootingLineY = 1.225f;
                         if (Mathf.Abs(relativePosition.y) < Mathf.Abs(relativePosition.x))
                         {
@@ -206,10 +245,10 @@ public class Enemy : MonoBehaviour
 
     public bool CanAttack()
     {
-        if (attackCooldownTimer < attackCooldown)
+        if (attackCooldownTimer < attackCooldown.Value)
             return false;
 
-        if (rangedAttackTarget && Vector2.Distance(rangedAttackTarget.position, transform.position) > attackRange)
+        if (rangedAttackTarget && Vector2.Distance(rangedAttackTarget.transform.position, transform.position) > attackRange)
             return false;
 
         return true;
@@ -225,8 +264,9 @@ public class Enemy : MonoBehaviour
             if (shootingLine)
             {
                 shootingLine.SetPosition(0, shootingLine.transform.position);
-                shootingLine.SetPosition(1, rangedAttackTarget.position);
+                shootingLine.SetPosition(1, rangedAttackTarget.transform.position);
                 shootingLine.enabled = true;
+                rangedAttackTarget.TakeDamage(1);
             }
         }
         else
@@ -235,14 +275,16 @@ public class Enemy : MonoBehaviour
             if (attackType == AttackType.Meelee)
             {
                 float randomValue = Random.value;
-                animation = randomValue > 0.75f ? OfficerAnimation.KarateKick : randomValue > 0.5f ? OfficerAnimation.Kicking : OfficerAnimation.Punching;
+                animation = randomValue > 0.75f ? OfficerAnimation.KarateKick : randomValue > 0.45f ? OfficerAnimation.Kicking : OfficerAnimation.Punching;
             }
 
             int count = Physics2D.OverlapCircleNonAlloc(transform.position, attackRange, detectedMeeleeColliders);
             for (int i = 0; i < count; i++)
             {
-
-                // detectedMeeleeColliders[i].TryGetComponent<CatMember>().Damage();
+                if (detectedMeeleeColliders[i].TryGetComponent<CatMember>(out var member))
+                {
+                    member.TakeDamage(1);
+                }
             }
             SetAnimation(animation);
         }
@@ -256,5 +298,4 @@ public class Enemy : MonoBehaviour
 
         isAttacking = false;
     }
-
 }
