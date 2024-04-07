@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Grid))]
 public class WorldGenerator : MonoBehaviour
 {
+    public static WorldGenerator Instance { get; private set; }
+
     [SerializeField]
     private WorldGenerationSettings settings;
     [SerializeField]
@@ -36,6 +38,11 @@ public class WorldGenerator : MonoBehaviour
     private void Reset()
     {
         observerCamera = Camera.main;
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     private void Start()
