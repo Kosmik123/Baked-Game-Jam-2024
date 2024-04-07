@@ -53,12 +53,13 @@ public class SOCat : ScriptableObject
         // blue -> fur
         // green -> eyes
         image.sprite = catSprite;
-        var material = image.material;
+        var material = Instantiate(image.material);
         image.color = new Color(image.color.r, image.color.g, image.color.b, 255);
 
         material.SetColor("_Red", catNoseColor);
         material.SetColor("_Blue", catColor);
         material.SetColor("_Green", catEyeColor);
+        image.material = material;
     }
 
     public SCatDisplayInfo GetDisplayInfo()
