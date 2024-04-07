@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1485496353320214094}
   - component: {fileID: 7480658707355875242}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Wall Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7753258037598225957}
   - component: {fileID: 5509174974132560860}
   - component: {fileID: 4660234151596852941}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Wall Horizontal
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   - {x: 2.5, y: -0.5, z: 0}
   m_ShapePathHash: -1177645901
   m_Mesh: {fileID: 0}
-  m_InstanceId: -171700
+  m_InstanceId: 55832
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.5, y: 0.5, z: 0}
@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7569594195681179642}
   - component: {fileID: 1568376681243458063}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Wall Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
