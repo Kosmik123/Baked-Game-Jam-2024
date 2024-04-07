@@ -90,13 +90,17 @@ public class Enemy : MonoBehaviour
     [ShowNonSerializedField]
     private float attackRange;
     [SerializeField]
+    private LayerMask projectilesBlockingLayers;
+    [SerializeField]
     private RandomValue attackCooldown;
     [ShowNonSerializedField]
     private float attackCooldownTimer;
     [SerializeField]
-    private CatMember rangedAttackTarget; // cat member
+    private CatMember attackAndChaseTarget; // cat member
     [SerializeField]
     private LineRenderer shootingLine;
+    [SerializeField]
+    private LayerMask damagedLayers; 
 
     [ShowNonSerializedField]
     private bool isAttacking;
@@ -134,8 +138,7 @@ public class Enemy : MonoBehaviour
         if (isChasing == false && squareDistanceToPlayer < playerDetectionRange.Value * playerDetectionRange.Value)
         {
             isChasing = true;
-            if (attackType == AttackType.Ranged)
-                rangedAttackTarget = PlayerManager.Instance.TeamMembers[Random.Range(0, PlayerManager.Instance.TeamMembers.Count)].member;  // potem to ma byæ cat member
+            attackAndChaseTarget = PlayerManager.Instance.TeamMembers[Random.Range(0, PlayerManager.Instance.TeamMembers.Count)].member;  // potem to ma byæ cat member
 
             //exclamationAnimation?.Play();
             CancelInvoke(nameof(ChangePatrolTarget));
@@ -149,7 +152,7 @@ public class Enemy : MonoBehaviour
         float speed = isChasing ? chasingSpeed.Value : patrollingSpeed.Value;
         if (isChasing)
         {
-            currentTarget = player.transform.position;
+            currentTarget = attackAndChaseTarget.transform.position;
         }
         
         var direction = currentTarget - (Vector2)transform.position;
@@ -171,7 +174,7 @@ public class Enemy : MonoBehaviour
                         animation = OfficerAnimation.RunningWithNightstick;
                         break;
                     case AttackType.Ranged:
-                        var relativePosition = rangedAttackTarget.transform.position - transform.position;
+                        var relativePosition = attackAndChaseTarget.transform.position - transform.position;
                         float shootingLineY = 1.225f;
                         if (Mathf.Abs(relativePosition.y) < Mathf.Abs(relativePosition.x))
                         {
@@ -248,7 +251,10 @@ public class Enemy : MonoBehaviour
         if (attackCooldownTimer < attackCooldown.Value)
             return false;
 
-        if (rangedAttackTarget && Vector2.Distance(rangedAttackTarget.transform.position, transform.position) > attackRange)
+        if (attackAndChaseTarget && Vector2.Distance(attackAndChaseTarget.transform.position, transform.position) > attackRange)
+            return false;
+
+        if (attackType == AttackType.Ranged && Physics2D.Linecast(transform.position, attackAndChaseTarget.transform.position, projectilesBlockingLayers))
             return false;
 
         return true;
@@ -264,9 +270,9 @@ public class Enemy : MonoBehaviour
             if (shootingLine)
             {
                 shootingLine.SetPosition(0, shootingLine.transform.position);
-                shootingLine.SetPosition(1, rangedAttackTarget.transform.position);
+                shootingLine.SetPosition(1, attackAndChaseTarget.transform.position);
                 shootingLine.enabled = true;
-                rangedAttackTarget.TakeDamage(1);
+                attackAndChaseTarget.TakeDamage(1);
             }
         }
         else
@@ -278,7 +284,7 @@ public class Enemy : MonoBehaviour
                 animation = randomValue > 0.75f ? OfficerAnimation.KarateKick : randomValue > 0.45f ? OfficerAnimation.Kicking : OfficerAnimation.Punching;
             }
 
-            int count = Physics2D.OverlapCircleNonAlloc(transform.position, attackRange, detectedMeeleeColliders);
+            int count = Physics2D.OverlapCircleNonAlloc(transform.position, attackRange, detectedMeeleeColliders, damagedLayers);
             for (int i = 0; i < count; i++)
             {
                 if (detectedMeeleeColliders[i].TryGetComponent<CatMember>(out var member))
@@ -288,7 +294,7 @@ public class Enemy : MonoBehaviour
             }
             SetAnimation(animation);
         }
-        Invoke(nameof(EndAttacking), 0.3f);
+        Invoke(nameof(EndAttacking), 0.2f);
     }
 
     private void EndAttacking()
@@ -297,5 +303,13 @@ public class Enemy : MonoBehaviour
             shootingLine.enabled = false;
 
         isAttacking = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.DrawSphere(transform.position, attackRange);
+        }
     }
 }

@@ -5,15 +5,20 @@ using UnityEngine;
 
 namespace Managers
 {
+    public delegate void CatDamageEventHandler (CatMember cat, int damage); 
+
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField] private SOCat debugCat;
+        public CatDamageEventHandler OnCatDamaged;
         
         [SerializeField] private GameObject catFollower;
         [SerializeField] private GameObject catLeader;
         [SerializeField] private GameObject LevelUpCanvas;
         [SerializeField] private GameObject NewCatCanvas;
         [SerializeField] private List<KeyColors> keyColors;
+
+        [SerializeField]
+        private WorldGenerator worldGenerator;
 
         public List<KeyColors> KeyColors => keyColors;
         
@@ -31,8 +36,6 @@ namespace Managers
         {
             if (Instance != null && Instance != this) Destroy(gameObject);
             else Instance = this;
-            
-            StartRun(debugCat);
         }
 
         private void LateUpdate()
@@ -42,7 +45,7 @@ namespace Managers
             Camera.main.transform.position = currentLeader.leaderScript.transform.position;
         }
 
-        private void StartRun(SOCat cat)
+        public void StartRun(SOCat cat)
         {
             var catLeaderPrefab = Instantiate(catLeader, Vector2.zero, Quaternion.identity);
             currentLeader = (catLeaderPrefab.GetComponent<FollowLeader>(), cat);
@@ -54,6 +57,13 @@ namespace Managers
                 health = cat.GetSpecificInfo(1).maxHealth,
             }, KeyCode.Q);
             teamMembers.Add((member, KeyCode.Q));
+            member.OnCatDamaged += Member_OnCatDamaged;
+            worldGenerator.Generate();
+        }
+
+        private void Member_OnCatDamaged(CatMember cat, int damage)
+        {
+            OnCatDamaged?.Invoke(cat, damage);
         }
 
         private KeyCode GetAttackKey()
@@ -91,6 +101,8 @@ namespace Managers
             {
                 var catMember = SpawnCatFollower(cat, position);
                 teamMembers.Add((catMember, GetAttackKey()));
+                catMember.OnCatDamaged += Member_OnCatDamaged;
+
                 var catFollower = catMember.GetComponentInParent<CatFollower>();
                 currentLeader.leaderScript.AddFollower(catFollower);
                 return true;

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 897112652, guid: 1603f1d27edd30943af859a7b31433c0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -670,7 +670,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       m_ConstantMin: 4
-      m_ConstantMax: 0
+      m_ConstantMax: 12
     value: 0
   exclamationAnimation: {fileID: 0}
   chasingSpeed:
@@ -729,8 +729,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_ConstantMin: 0
-      m_ConstantMax: 0
+      m_ConstantMin: 1
+      m_ConstantMax: 2
     value: 0
   rangedAttackRange:
     range:
@@ -748,12 +748,15 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_ConstantMin: 0
-      m_ConstantMax: 0
+      m_ConstantMin: 4
+      m_ConstantMax: 8
     value: 0
+  projectilesBlockingLayers:
+    serializedVersion: 2
+    m_Bits: 1048576
   attackCooldown:
     range:
-      m_Mode: 0
+      m_Mode: 3
       m_CurveMultiplier: 0
       m_CurveMin:
         serializedVersion: 2
@@ -767,11 +770,14 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_ConstantMin: 0
-      m_ConstantMax: 0
+      m_ConstantMin: 0.5
+      m_ConstantMax: 2
     value: 0
-  rangedAttackTarget: {fileID: 0}
+  attackAndChaseTarget: {fileID: 0}
   shootingLine: {fileID: 8629120372044371027}
+  damagedLayers:
+    serializedVersion: 2
+    m_Bits: 65536
 --- !u!50 &7049064126930416960
 Rigidbody2D:
   serializedVersion: 4

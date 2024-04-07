@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CatPackage;
 using Managers;
+using Managers.Enum;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,7 @@ namespace DefaultNamespace.CagePack
 {
     public class Cage : MonoBehaviour
     {
+        [SerializeField] private GameObject heartsParticles;
         [SerializeField] private Transform catInBox;
         [SerializeField] private GameObject bars;
         [SerializeField] private float radius;
@@ -48,6 +50,10 @@ namespace DefaultNamespace.CagePack
 
         public void OpenCage()
         {
+            AudioManager.Instance.PlaySoundEffect(ESoundEffect.cage_open);
+            var spawnedHearts = Instantiate(heartsParticles, transform.position, Quaternion.identity);
+            Destroy(spawnedHearts, 1f);
+            
             opened = true;
             bars.GetComponent<Bars>().ThrowBars();
             var catSpawnPos = catInBox.transform.position;

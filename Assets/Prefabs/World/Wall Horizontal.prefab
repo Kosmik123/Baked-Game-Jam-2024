@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1485496353320214094}
   - component: {fileID: 7480658707355875242}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Wall Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 739984443
   m_SortingLayer: 1
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b78c39dec5452a0438fd198825ff6038, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7753258037598225957}
   - component: {fileID: 5509174974132560860}
   - component: {fileID: 4660234151596852941}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Wall Horizontal
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   - {x: 2.5, y: -0.5, z: 0}
   m_ShapePathHash: -1177645901
   m_Mesh: {fileID: 0}
-  m_InstanceId: -171700
+  m_InstanceId: 55832
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.5, y: 0.5, z: 0}
@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7569594195681179642}
   - component: {fileID: 1568376681243458063}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Wall Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,13 +281,13 @@ SpriteRenderer:
   m_SortingLayerID: 739984443
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ced6972063da29545bbdab9fed4c7814, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
+  m_AdaptiveModeThreshold: 1
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
