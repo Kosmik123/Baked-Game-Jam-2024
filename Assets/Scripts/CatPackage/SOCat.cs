@@ -54,6 +54,8 @@ public class SOCat : ScriptableObject
         // green -> eyes
         image.sprite = catSprite;
         var material = image.material;
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 255);
+
         material.SetColor("_Red", catNoseColor);
         material.SetColor("_Blue", catColor);
         material.SetColor("_Green", catEyeColor);
