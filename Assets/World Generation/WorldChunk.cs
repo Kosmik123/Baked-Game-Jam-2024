@@ -5,9 +5,14 @@ public class WorldChunk : MonoBehaviour
 {
     public event System.Action<bool> OnVisibilityChanged;
 
+    [SerializeField]
+    private Transform wall;
+
     private void Awake()
     {
         SetVisible(IsVisible);
+        if (wall && Random.value < 0.5f)
+            wall.localPosition = -wall.localPosition;
     }
 
     [ShowNonSerializedField, ReadOnly]
