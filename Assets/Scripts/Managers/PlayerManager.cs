@@ -5,8 +5,12 @@ using UnityEngine;
 
 namespace Managers
 {
+    public delegate void CatDamageEventHandler (CatMember cat, int damage); 
+
     public class PlayerManager : MonoBehaviour
     {
+        public CatDamageEventHandler OnCatDamaged;
+
         [SerializeField] private SOCat debugCat;
         
         [SerializeField] private GameObject catFollower;
@@ -54,6 +58,12 @@ namespace Managers
                 health = cat.GetSpecificInfo(1).maxHealth,
             }, KeyCode.Q);
             teamMembers.Add((member, KeyCode.Q));
+            member.OnCatDamaged += Member_OnCatDamaged;
+        }
+
+        private void Member_OnCatDamaged(CatMember cat, int damage)
+        {
+            OnCatDamaged?.Invoke(cat, damage);
         }
 
         private KeyCode GetAttackKey()
@@ -91,6 +101,8 @@ namespace Managers
             {
                 var catMember = SpawnCatFollower(cat, position);
                 teamMembers.Add((catMember, GetAttackKey()));
+                catMember.OnCatDamaged += Member_OnCatDamaged;
+
                 var catFollower = catMember.GetComponentInParent<CatFollower>();
                 currentLeader.leaderScript.AddFollower(catFollower);
                 return true;
